@@ -2,12 +2,12 @@ const { sendEmailSync } = require("./send-mail");
 const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
-const {} = process.env;
+const { DOMAIN } = process.env;
 const mailHelper = {
   AuthMail: (email, token) => {
     let url = path.join(__dirname, `../html/email-confirmation.html`);
     let html = fs.readFileSync(url, "utf8");
-    html = html.replace("{URL}", `http://localhost:3000/signin?token=${token}`);
+    html = html.replace("{URL}", `${DOMAIN}/signin?token=${token}`);
 
     sendEmailSync({
       to: email,
